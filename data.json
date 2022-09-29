@@ -1,0 +1,38 @@
+[
+  {
+    "id": "1",
+    "name": "Pasha",
+    "isMan": true,
+    "age": 5
+  },
+  {
+    "id": "2",
+    "name": "Lesha",
+    "isMan": true,
+    "age": 24
+  },
+  {
+    "id": "3",
+    "name": "Masha",
+    "isMan": false,
+    "age": 21
+  },
+  {
+    "id": "4",
+    "name": "Sasha",
+    "isMan": false,
+    "age": 51
+  },
+  {
+    "id": "5",
+    "name": "Валера",
+    "isMan": false,
+    "age": 7
+  },
+  {
+    "id": "6",
+    "name": "Sasha",
+    "isMan": true,
+    "age": 49
+  }
+]
