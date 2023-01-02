@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { validationResult } from "express-validator";
 import { userService } from "services";
+import { handleErrors } from "../utils/errorsHandler";
 
 class UserController {
   async getUser(req: Request, res: Response) {
@@ -13,11 +14,7 @@ class UserController {
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
-      console.log("--Error--");
-      return res.status(400).send({
-        success: false,
-        errors: errors.array(),
-      });
+      handleErrors(res, errors);
     } else {
       const result = await userService.updateUserFully(req, res);
       res.send(result);

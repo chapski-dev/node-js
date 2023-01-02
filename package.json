@@ -9,8 +9,8 @@
     "build": "npx tsc"
   },
   "dependencies": {
-    "@sentry/node": "^7.12.1",
-    "@sentry/tracing": "^7.12.1",
+    "@sentry/node": "^7.28.1",
+    "@sentry/tracing": "^7.28.1",
     "@types/express-validator": "^3.0.0",
     "@types/swagger-jsdoc": "^6.0.1",
     "@types/swagger-ui-express": "^4.1.3",

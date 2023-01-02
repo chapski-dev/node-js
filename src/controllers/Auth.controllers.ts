@@ -1,18 +1,16 @@
 import { Request, Response } from "express";
 import { userService } from "../services";
-import fs from "fs";
+import { validationResult } from "express-validator";
+import { handleErrors } from "../utils/errorsHandler";
 
 class AuthController {
   async login(req: Request, res: Response) {
-    try {
-      const { login, password } = req.body;
-      // const user = await userServices.getUser(login);
-
-      // if(user) {
-      //   const compareUser = await bcrypt.compare(password, user.password);
-
-      // }
-    } catch (error) {}
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      const resErr = handleErrors(res, errors);
+      return resErr;
+    }
+    res.send("Welcome back!");
   }
 }
 
