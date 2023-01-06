@@ -1,12 +1,11 @@
-import { validationResult } from "express-validator";
-import e, { Request, Response } from "express";
+import { Request, Response } from "express";
 import fs from "fs";
-import { UsersType } from "types";
+import { IUser } from "types";
 
 export class UserService {
   async getUser(req: Request, res: Response) {
     const fileContent = fs.readFileSync("data.json", "utf8");
-    const users: UsersType[] = JSON.parse(fileContent);
+    const users: IUser[] = JSON.parse(fileContent);
     const user = users.find((el) => el.id === req.params.id);
     res.send(user);
   }
@@ -14,7 +13,7 @@ export class UserService {
   //PUT
   async updateUserFully(req: Request, res: Response) {
     const fileContent = fs.readFileSync("data.json", "utf8");
-    const users: UsersType[] = JSON.parse(fileContent);
+    const users: IUser[] = JSON.parse(fileContent);
 
     const updatedUser = users.map((i) =>
       i.id === req.params.id ? req.body : i
@@ -28,7 +27,7 @@ export class UserService {
   //PATCH
   async updateUserPartly(req: Request, res: Response) {
     const fileContent = fs.readFileSync("data.json", "utf8");
-    const users: UsersType[] = JSON.parse(fileContent);
+    const users: IUser[] = JSON.parse(fileContent);
 
     const updateUsers = users.map((el) => {
       return el.id === req.params.id ? Object.assign(el, req.body) : el;
@@ -43,7 +42,7 @@ export class UserService {
 
   async deleteUser(req: Request, res: Response) {
     const fileContent = fs.readFileSync("data.json", "utf8");
-    const users: UsersType[] = JSON.parse(fileContent);
+    const users: IUser[] = JSON.parse(fileContent);
 
     console.log("---UserService---");
     console.log(req.params);

@@ -1,7 +1,7 @@
+import { AppError, HttpCode, errorHandler } from "errors";
 import { Request, Response } from "express";
 import { validationResult } from "express-validator";
 import { userService } from "services";
-import { handleErrors } from "../utils/errorsHandler";
 
 class UserController {
   async getUser(req: Request, res: Response) {
@@ -11,13 +11,19 @@ class UserController {
 
   //PUT
   async updateUserFully(req: Request, res: Response) {
-    const errors = validationResult(req);
-
-    if (!errors.isEmpty()) {
-      handleErrors(res, errors);
-    } else {
-      const result = await userService.updateUserFully(req, res);
-      res.send(result);
+    const validationErrors = validationResult(req);
+    try {
+      if (!validationErrors.isEmpty()) {
+        throw new AppError({
+          description: "Not valid data.",
+          httpCode: HttpCode.BAD_REQUEST,
+        });
+      } else {
+        const result = await userService.updateUserFully(req, res);
+        res.send(result);
+      }
+    } catch (error: any) {
+      errorHandler.handleError(error, res, validationErrors);
     }
   }
 

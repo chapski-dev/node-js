@@ -1,76 +1,77 @@
-import { handleErrors } from "./../utils/errorsHandler";
+import { AppError, HttpCode, errorHandler } from "errors";
 import { validationResult } from "express-validator";
 import { Request, Response } from "express";
 import { usersService } from "services";
-import * as Sentry from "@sentry/node";
 
 class UsersController {
   async getUsers(req: Request, res: Response) {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      const errorRes = handleErrors(res, errors);
-      return errorRes;
-    } else {
-      try {
+    const validationErrors = validationResult(req);
+
+    try {
+      if (!validationErrors.isEmpty()) {
+        throw new AppError({
+          description: "Not valid data.",
+          httpCode: HttpCode.BAD_REQUEST,
+        });
+      } else {
         const result = await usersService.getUsers(req, res);
         res.send(result);
-      } catch (error: any) {
-        Sentry.captureException(error);
-        res.send({ error: error.message });
       }
+    } catch (error: any) {
+      return errorHandler.handleError(error, res, validationErrors);
     }
   }
 
   async getUsersByGender(req: Request, res: Response) {
-    const errors = validationResult(req);
+    const validationErrors = validationResult(req);
 
-    if (!errors.isEmpty()) {
-      const errorRes = handleErrors(res, errors);
-      return errorRes;
-    } else {
-      try {
+    try {
+      if (!validationErrors.isEmpty()) {
+        throw new AppError({
+          description: "Not valid data.",
+          httpCode: HttpCode.BAD_REQUEST,
+        });
+      } else {
         const result = await usersService.getUsersByGender(req, res);
         res.send(result);
-      } catch (error: any) {
-        Sentry.captureException(error);
-        res.send({ error: error.message });
       }
+    } catch (error: any) {
+      return errorHandler.handleError(error, res, validationErrors);
     }
   }
 
   async getUsersByAge(req: Request, res: Response) {
-    const errors = validationResult(req);
+    const validationErrors = validationResult(req);
 
-    if (!errors.isEmpty()) {
-      const errorRes = handleErrors(res, errors);
-      return errorRes;
-    } else {
-      try {
-        console.log("getUsersByAge:", req.query);
+    try {
+      if (!validationErrors.isEmpty()) {
+        throw new AppError({
+          description: "Not valid data.",
+          httpCode: HttpCode.BAD_REQUEST,
+        });
+      } else {
         const result = await usersService.getUsersByAge(req, res);
         res.send(result);
-      } catch (error: any) {
-        Sentry.captureException(error);
-        res.send({ error: error.message });
       }
+    } catch (error: any) {
+      return errorHandler.handleError(error, res, validationErrors);
     }
   }
 
   async createUser(req: Request, res: Response) {
-    const errors = validationResult(req);
-
-    if (!errors.isEmpty()) {
-      const errorRes = handleErrors(res, errors);
-      return errorRes;
-    } else {
-      try {
-        console.log("createUser req", req.body);
+    const validationErrors = validationResult(req);
+    try {
+      if (!validationErrors.isEmpty()) {
+        throw new AppError({
+          description: "Not valid data.",
+          httpCode: HttpCode.BAD_REQUEST,
+        });
+      } else {
         const result = await usersService.createUser(req, res);
         res.send(result);
-      } catch (error: any) {
-        Sentry.captureException(error);
-        res.send({ error: error.message });
       }
+    } catch (error: any) {
+      return errorHandler.handleError(error, res, validationErrors);
     }
   }
 }

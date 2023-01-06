@@ -34,5 +34,14 @@
     "name": "Sasha",
     "isMan": true,
     "age": 49
+  },
+  {
+    "id": 7,
+    "name": "Chapski",
+    "username": "chappa_savage",
+    "email": "example@example.com",
+    "password": "1Sq_22qw",
+    "isMan": true,
+    "age": 25
   }
 ]

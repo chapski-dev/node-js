@@ -1,11 +1,13 @@
+import { IErrorMessage } from "types";
 import { Request, Response } from "express";
 import fs from "fs";
-import { UsersType } from "types";
+import { IUser } from "types";
+import { AppError, HttpCode } from "errors/AppError";
 
 class UsersService {
   async getUsers(req: Request, res: Response) {
     const fileContent = fs.readFileSync("data.json", "utf8");
-    const users: UsersType[] = JSON.parse(fileContent);
+    const users: IUser[] = JSON.parse(fileContent);
 
     const minAge = Number(req.query.min);
     const maxAge = Number(req.query.max);
@@ -22,7 +24,7 @@ class UsersService {
 
   async getUsersByGender(req: Request, res: Response) {
     const fileContent = fs.readFileSync("data.json", "utf8");
-    const users: UsersType[] = JSON.parse(fileContent);
+    const users: IUser[] = JSON.parse(fileContent);
     console.log(req.params);
 
     const genderSepareted = users.filter((el) =>
@@ -37,16 +39,28 @@ class UsersService {
 
   async getUsersByAge(req: Request, res: Response) {
     const fileContent = fs.readFileSync("data.json", "utf8");
-    const users: UsersType[] = JSON.parse(fileContent);
+    const users: IUser[] = JSON.parse(fileContent);
     console.log("getUsersByAge:", req.query);
   }
 
   async createUser(req: Request, res: Response) {
+    const user: Omit<IUser, "id"> = req.body;
     const fileContent = fs.readFileSync("data.json", "utf8");
-    const users: UsersType[] = JSON.parse(fileContent);
-    users.push(req.body);
-    fs.writeFileSync("data.json", JSON.stringify(users, null, 2));
-    return fileContent;
+    const users: IUser[] = JSON.parse(fileContent);
+    const isEmailExist = !!users.find((el) => el.email === user.email)?.email;
+    const isUsernameExist = !!users.find((el) => el.email === user.email)
+      ?.username;
+    if (isEmailExist || isUsernameExist) {
+      throw new AppError({
+        description: "This username or email already exist.",
+        httpCode: HttpCode.BAD_REQUEST,
+      });
+    } else {
+      const userWithId: IUser = Object.assign({ id: users.length + 1 }, user);
+      users.push(userWithId);
+      fs.writeFileSync("data.json", JSON.stringify(users, null, 2));
+      return userWithId;
+    }
   }
 }
 

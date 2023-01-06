@@ -1,5 +1,2 @@
-import { UsersType } from "./users";
-
-export type {
-  UsersType
-}
+export * from './errors.d'
+export * from './users.d'
