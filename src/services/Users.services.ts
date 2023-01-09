@@ -1,8 +1,8 @@
-import { IErrorMessage } from "types";
 import { Request, Response } from "express";
 import fs from "fs";
 import { IUser } from "types";
-import { AppError, HttpCode } from "errors/AppError";
+import { AppError, HttpCode } from "errors";
+import * as bcrypt from "bcrypt";
 
 class UsersService {
   async getUsers(req: Request, res: Response) {
@@ -56,7 +56,11 @@ class UsersService {
         httpCode: HttpCode.BAD_REQUEST,
       });
     } else {
-      const userWithId: IUser = Object.assign({ id: users.length + 1 }, user);
+      const hashPass = bcrypt.hashSync(user.password, 10);
+      const userWithId: IUser = Object.assign(
+        { id: users.length + 1, hashPass: hashPass },
+        user
+      );
       users.push(userWithId);
       fs.writeFileSync("data.json", JSON.stringify(users, null, 2));
       return userWithId;

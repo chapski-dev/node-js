@@ -12,7 +12,7 @@ class ErrorHandler {
     response
       .status(error.httpCode)
       .json(
-        validationErrors
+        validationErrors && !validationErrors?.isEmpty()
           ? {
               message: error.message,
               errors: validationErrors.array(),

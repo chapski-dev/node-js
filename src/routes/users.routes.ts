@@ -1,11 +1,10 @@
-import { validator } from "./../utils/validator";
+import { validator } from "utils/validator";
 import express from "express";
-import { usersController } from "../controllers";
+import { usersController } from "controllers";
 
 const router = express.Router();
+
 router.get("/", validator.validationGetUsers(), usersController.getUsers);
-
-
 router.get(
   "/:gender",
   validator.validateGetUsersGender(),

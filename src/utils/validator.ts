@@ -5,7 +5,7 @@ import { ERROR_MESSAGE } from "../constants";
 class Validator {
   validatePost(req?: Request) {
     return [
-      body("login")
+      body("email")
         .isEmail()
         .normalizeEmail()
         .withMessage(ERROR_MESSAGE.incorect_login),
@@ -22,7 +22,7 @@ class Validator {
   }
   validateEmail(req?: Request) {
     return [
-      body("login")
+      body("email")
         .isEmail()
         .normalizeEmail()
         .withMessage(ERROR_MESSAGE.incorect_login),

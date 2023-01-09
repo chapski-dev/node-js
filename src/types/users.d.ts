@@ -4,6 +4,7 @@ export type IUser = {
   username: string;
   email: string;
   password: string;
+  hashPass: string;
   isMan: boolean;
   age: number;
 };

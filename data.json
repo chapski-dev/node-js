@@ -43,5 +43,15 @@
     "password": "1Sq_22qw",
     "isMan": true,
     "age": 25
+  },
+  {
+    "id": 8,
+    "hashPass": "$2b$10$B70ssjJjNCvGplhPQr3Anu1tlBxgaUeoHgbN.dyCa4GuQelKx.i8.",
+    "name": "Chapski",
+    "username": "chappa_savage",
+    "email": "chappa@example.com",
+    "password": "Chappa1$avagge",
+    "isMan": true,
+    "age": 25
   }
 ]
