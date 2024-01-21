@@ -1,57 +1,67 @@
-[
-  {
-    "id": "1",
-    "name": "Pasha",
-    "isMan": true,
-    "age": 5
-  },
-  {
-    "id": "2",
-    "name": "Lesha",
-    "isMan": true,
-    "age": 24
-  },
-  {
-    "id": "3",
-    "name": "Masha",
-    "isMan": false,
-    "age": 21
-  },
-  {
-    "id": "4",
-    "name": "Sasha",
-    "isMan": false,
-    "age": 51
-  },
-  {
-    "id": "5",
-    "name": "Валера",
-    "isMan": false,
-    "age": 7
-  },
-  {
-    "id": "6",
-    "name": "Sasha",
-    "isMan": true,
-    "age": 49
-  },
-  {
-    "id": 7,
-    "name": "Chapski",
-    "username": "chappa_savage",
-    "email": "example@example.com",
-    "password": "1Sq_22qw",
-    "isMan": true,
-    "age": 25
-  },
-  {
-    "id": 8,
-    "hashPass": "$2b$10$B70ssjJjNCvGplhPQr3Anu1tlBxgaUeoHgbN.dyCa4GuQelKx.i8.",
-    "name": "Chapski",
-    "username": "chappa_savage",
-    "email": "chappa@example.com",
-    "password": "Chappa1$avagge",
-    "isMan": true,
-    "age": 25
-  }
-]
+{
+  "users": [
+    {
+      "id": "1",
+      "name": "Pasha",
+      "isMan": true,
+      "age": 5
+    },
+    {
+      "id": "2",
+      "name": "Lesha",
+      "isMan": true,
+      "age": 24
+    },
+    {
+      "id": "3",
+      "name": "Masha",
+      "isMan": false,
+      "age": 21
+    },
+    {
+      "id": "4",
+      "name": "Sasha",
+      "isMan": false,
+      "age": 51
+    },
+    {
+      "id": "5",
+      "name": "Валера",
+      "isMan": false,
+      "age": 7
+    },
+    {
+      "id": "6",
+      "name": "Sasha",
+      "isMan": true,
+      "age": 49
+    },
+    {
+      "id": 7,
+      "name": "Chapski",
+      "username": "chappa_savage",
+      "email": "example@example.com",
+      "password": "1Sq_22qw",
+      "isMan": true,
+      "age": 25
+    },
+    {
+      "id": 8,
+      "hashPass": "$2b$10$B70ssjJjNCvGplhPQr3Anu1tlBxgaUeoHgbN.dyCa4GuQelKx.i8.",
+      "name": "Chapski",
+      "username": "chappa_savage",
+      "email": "chappa@example.com",
+      "password": "Chappa1$avagge",
+      "isMan": true,
+      "age": 25
+    }
+  ],
+  "todos": [
+    {
+      "title": "Помыть руки",
+      "isCompleted": false,
+      "idUser": "1",
+      "id": "c9c0832d-07f3-4d7f-8d03-30a2f0b58de7"
+    }
+  ]
+}

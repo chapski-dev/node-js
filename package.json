@@ -15,16 +15,19 @@
     "@types/express-validator": "^3.0.0",
     "@types/swagger-jsdoc": "^6.0.1",
     "@types/swagger-ui-express": "^4.1.3",
+    "@types/uuid": "^9.0.7",
     "bcrypt": "^5.1.0",
     "dotenv": "^16.0.2",
     "express": "^4.18.1",
     "express-validator": "^6.14.2",
     "fs": "^0.0.1-security",
     "jsonwebtoken": "^8.5.1",
+    "mgr-swagger-express": "^0.0.6",
     "mongodb": "^4.10.0",
     "mongoose": "^6.6.3",
     "swagger-jsdoc": "^6.2.7",
-    "swagger-ui-express": "^4.6.0"
+    "swagger-ui-express": "^4.6.0",
+    "uuid": "^9.0.1"
   },
   "devDependencies": {
     "@types/express": "^4.17.13",

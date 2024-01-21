@@ -5,7 +5,7 @@ import { IUser } from "types";
 export class UserService {
   async getUser(req: Request, res: Response) {
     const fileContent = fs.readFileSync("data.json", "utf8");
-    const users: IUser[] = JSON.parse(fileContent);
+    const users: IUser[] = JSON.parse(fileContent).users;
     const user = users.find((el) => el.id === req.params.id);
     res.send(user);
   }
@@ -13,7 +13,7 @@ export class UserService {
   //PUT
   async updateUserFully(req: Request, res: Response) {
     const fileContent = fs.readFileSync("data.json", "utf8");
-    const users: IUser[] = JSON.parse(fileContent);
+    const users: IUser[] = JSON.parse(fileContent).users;
 
     const updatedUser = users.map((i) =>
       i.id === req.params.id ? req.body : i
@@ -27,7 +27,7 @@ export class UserService {
   //PATCH
   async updateUserPartly(req: Request, res: Response) {
     const fileContent = fs.readFileSync("data.json", "utf8");
-    const users: IUser[] = JSON.parse(fileContent);
+    const users: IUser[] = JSON.parse(fileContent).users;
 
     const updateUsers = users.map((el) => {
       return el.id === req.params.id ? Object.assign(el, req.body) : el;
@@ -42,7 +42,7 @@ export class UserService {
 
   async deleteUser(req: Request, res: Response) {
     const fileContent = fs.readFileSync("data.json", "utf8");
-    const users: IUser[] = JSON.parse(fileContent);
+    const users: IUser[] = JSON.parse(fileContent).users;
 
     console.log("---UserService---");
     console.log(req.params);
@@ -53,6 +53,14 @@ export class UserService {
 
     return { deleted_user: user, users: users };
   }
+
+  async findOne(email: string) {
+    const fileContent = fs.readFileSync("data.json", "utf8");
+    const users: IUser[] = JSON.parse(fileContent).users;
+    const user = users.find((el) => el.email === email);
+    return user;
+  }
+  
 }
 
 export const userService = new UserService();

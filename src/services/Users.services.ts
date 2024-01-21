@@ -7,16 +7,16 @@ import * as bcrypt from "bcrypt";
 class UsersService {
   async getUsers(req: Request, res: Response) {
     const fileContent = fs.readFileSync("data.json", "utf8");
-    const users: IUser[] = JSON.parse(fileContent);
+    const users: IUser[] = JSON.parse(fileContent).users;
 
     const minAge = Number(req.query.min);
     const maxAge = Number(req.query.max);
     const ageFilteredUsers = users.filter(
-      (el) =>
+      (el) => el.age ?
         (el.age >= minAge && el.age <= maxAge) ||
         el.age >= minAge ||
         el.age <= maxAge ||
-        el
+        el : null
     );
 
     return ageFilteredUsers;
@@ -24,7 +24,7 @@ class UsersService {
 
   async getUsersByGender(req: Request, res: Response) {
     const fileContent = fs.readFileSync("data.json", "utf8");
-    const users: IUser[] = JSON.parse(fileContent);
+    const users: IUser[] = JSON.parse(fileContent).users;
     console.log(req.params);
 
     const genderSepareted = users.filter((el) =>
@@ -39,14 +39,14 @@ class UsersService {
 
   async getUsersByAge(req: Request, res: Response) {
     const fileContent = fs.readFileSync("data.json", "utf8");
-    const users: IUser[] = JSON.parse(fileContent);
+    const users: IUser[] = JSON.parse(fileContent).users;
     console.log("getUsersByAge:", req.query);
   }
 
-  async createUser(req: Request, res: Response) {
-    const user: Omit<IUser, "id"> = req.body;
+  async createUser(req: Request<Omit<IUser, "id" | "hashPass">, Omit<IUser, "id" | "hashPass">, Omit<IUser, "id" | "hashPass">>, res: Response) {
+    const user = req.body;
     const fileContent = fs.readFileSync("data.json", "utf8");
-    const users: IUser[] = JSON.parse(fileContent);
+    const users: IUser[] = JSON.parse(fileContent).users;
     const isEmailExist = !!users.find((el) => el.email === user.email)?.email;
     const isUsernameExist = !!users.find((el) => el.email === user.email)
       ?.username;
